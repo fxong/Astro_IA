@@ -1,2 +1,2 @@
 # Astro_IA
-Interferometer Array Data Analysis in Astrophysics.
+Basic scripts for data analysis of interferometer array in astrophysics.
