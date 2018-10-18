@@ -1,12 +1,13 @@
 """
 Purpose:
-    clip the fitfile into sub-fitfile with the desired area
+    clip the fitsfile into sub-fitsfile with the desired area
 Usage:
 Caution:
     fitsfile may be fixed by CasaFix.py first
-    the unit of ra, dec and spec should refer to the head of fitsfile
+    the unit of x axis, y axis (and z axis) should refer to the head of fitsfile
 History:
     Completed. Version 0.8.0. Oct. 08, 18.
+    2D datacube support. TBC...
 Copyright:
     written by fxong@CfA
 """
