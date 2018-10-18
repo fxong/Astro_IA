@@ -15,7 +15,6 @@ pwd=os.getcwd()+'/'
 os.chdir(pwd)
 import astropy.io.fits as ft
 from numpy import reshape as rs
-# import astropy.units as u
 
 fitsfile='' # without suffix
 hdul=ft.open(fitsfile+'.fits')
