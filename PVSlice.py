@@ -3,7 +3,7 @@ Purpose:
     extract the position-velocity slice from a fitsfile
 Usage:
 Cautious:
-    ds9 region should be Line shape
+    ds9 region should be in Line shape
 History:
     Completed. Version 0.5.0. Oct. 18, 18.
     Path export. TBC...
@@ -11,7 +11,7 @@ Copyright: written by fxong@CfA
 """
 
 import os
-pwd=os.getcwd()+'/H13COP/PVSlice'
+pwd=os.getcwd()+'/'
 os.chdir(pwd)
 from astropy import units as u
 from astropy.coordinates import SkyCoord
@@ -20,13 +20,13 @@ from spectral_cube import SpectralCube
 from pvextractor import Path
 from pvextractor import extract_pv_slice
 
-fitsfile='H13COP_pbcor_rdv' # without suffix
-spec=[-30.,30.] # in km/s
-ds9path='ds9_slice3' # ds9 region file without suffix
+fitsfile='' # without suffix
+spec=[] # in km/s
+ds9path='' # ds9 region file without suffix
 pathx=[] # in deg
 pathy=[] # in deg
 step=1 # in pixel, defaut is 1
-width=35 # in arcsec, defaut is 0
+width=0 # in arcsec, defaut is 0
 frame='icrs' # icrs, galactic
 
 """ cube and path """
