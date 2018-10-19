@@ -25,9 +25,16 @@ y=[] # deg or km/s
 z=[] # deg or km/s
 olshow=False # True/False
 
-spec=[i*1e3 for i in spec]
-dim=[ra,dec,spec]
+# spec=[i*1e3 for i in spec]
+dim=[x,y,z]
 hdr=ft.getheader(fitsfile+'.fits')
+unit=[hdr['cunit1'], hdr['cunit2'], hdr['cunit3']]
+for i in range(len(unit)):
+    if unit[i]=='km/s' or 'm/s':
+        inax=i
+        fac=1e3 if if unit[i]=='km/s' else 1
+dim[inax]=[i*fac for i in dim[inax]]
+
 for i in range(len(dim)):
     if dim[i]!=[]:
         world=[hdr['CRVAL1'], hdr['CRVAL2'], hdr['CRVAL3']*1e3]
