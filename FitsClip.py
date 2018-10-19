@@ -26,6 +26,7 @@ y=[] # deg or km/s
 z=[] # deg or km/s
 olshow=False # True/False
 
+""" shape of new datacube """
 dim=[x,y,z]
 hdr=ft.getheader(fitsfile+'.fits')
 unit=[hdr['cunit1'], hdr['cunit2'], hdr['cunit3']]
@@ -48,6 +49,7 @@ for i in range(len(dim)):
     else:
         dim[i]=[0, hdr['naxis'+str(i+1)]-1]
 
+""" clip the new datacube """
 if not olshow:
     dim.reverse()
     shape=[i[1]-i[0]+1 for i in dim]
