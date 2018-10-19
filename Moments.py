@@ -62,8 +62,6 @@ elif axis=='dec':
     inax=2
 elif axis=='spec':
     inax=3
-else:
-    pass
 
 dim=[ra,dec,spec]
 pixel=[ohdr['CRPIX1'], ohdr['CRPIX2'], ohdr['CRPIX3']]
