@@ -6,6 +6,7 @@ Cautious:
 History:
     Completed. Version 0.1.0. Sep. 14, 18.
     Updated. Version 0.8.0. Sep. 20, 18.
+    Updated. Version 0.8.5. Oct. 18, 18.
 Copyright:
     written by fxong@CfA
 """
@@ -17,6 +18,7 @@ import astropy.io.fits as ft
 from numpy import reshape as rs
 
 fitsfile='' # without suffix
+outfitsfile=fitsfile+'_rdv' # output file
 hdul=ft.open(fitsfile+'.fits')
 hdr, dat=hdul[0].header, hdul[0].data
 hdul.close()
@@ -36,8 +38,6 @@ if hdr['CUNIT3']=='m/s':
     hdr['CRVAL3']=hdr['CRVAL3']/1e3
     hdr['CDELT3']=hdr['CDELT3']/1e3
     hdr['CUNIT3']='km/s'
-
 hdr['HISTORY']='Modified from '+fitsfile+'.fits'
 
-# fitsfile='' # without suffix
-ft.writeto(fitsfile+'_rdv.fits', dat, hdr, output_verify='fix+warn', overwrite=True)
+ft.writeto(outfitsfile+'.fits', dat, hdr, output_verify='fix+warn', overwrite=True)
