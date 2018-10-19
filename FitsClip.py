@@ -20,9 +20,9 @@ import astropy.io.fits as ft
 from astropy.wcs import WCS as wcs
 
 fitsfile='' # without suffix
-ra=[] # deg
-dec=[] # deg
-spec=[] # km/s
+x=[] # deg or km/s
+y=[] # deg or km/s
+z=[] # deg or km/s
 olshow=False # True/False
 
 spec=[i*1e3 for i in spec]
