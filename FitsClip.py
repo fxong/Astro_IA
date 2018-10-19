@@ -32,8 +32,10 @@ unit=[hdr['cunit1'], hdr['cunit2'], hdr['cunit3']]
 for i in range(len(unit)):
     if unit[i]=='km/s' or 'm/s':
         inax=i
-        fac=1e3 if if unit[i]=='km/s' else 1
-dim[inax]=[i*fac for i in dim[inax]]
+        fac=1e3 if unit[i]=='km/s' else 1 # test>>
+    else:
+        inax=False
+if inax: dim[inax]=[i*1e3 for i in dim[inax]]
 
 for i in range(len(dim)):
     if dim[i]!=[]:
