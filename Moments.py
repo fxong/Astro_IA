@@ -30,8 +30,9 @@ box=[] # [ra0,dec0,ra1,dec1(, ra2,dec2,ra3,dec3)] in pixel
 rms=0 # Jy/beam
 inpix=[-1] # [-1], [3*rms,1e3]
 expix=[-1] # [-1], [-1e3,-3*rms/-1]
+Nrms=3 # n*rms cutoff, default is 3*rms
 
-""" moment """
+""" input normalization """
 ohdr=ft.getheader(fitsfile+'.fits')
 
 if chans!=[]:
@@ -56,12 +57,10 @@ else:
     dec=[0, ohdr['NAXIS2']-1]
     box=''
 
-if axis=='ra':
-    inax=1
-elif axis=='dec':
-    inax=2
-elif axis=='spec':
-    inax=3
+""" integrated range retrieval """
+if axis=='ra': inax=1
+elif axis=='dec': inax=2
+elif axis=='spec': inax=3
 
 dim=[ra,dec,spec]
 pixel=[ohdr['CRPIX1'], ohdr['CRPIX2'], ohdr['CRPIX3']]
@@ -71,13 +70,14 @@ rlval=wcs(ohdr).wcs_pix2world(pixel[0], pixel[1], pixel[2], 0)
 rlval[2]=rlval[2]/1e3
 rlval=list(rlval[inax-1])
 
+""" moment """
 importfits(fitsfile+'.fits', fitsfile+'.im', zeroblanks=True, overwrite=True)
 
 if os.path.isdir('./'+fitsfile+'_mom.im'):
     os.system('rm -f '+fitsfile+'_mom.im')
 immoments(fitsfile+'.im', moments=moment, axis=axis, chans=chans, box=box, includepix=inpix, excludepix=expix, outfile=fitsfile+'_mom.im')
 
-""" export """
+""" export and header fix """
 exportfits(fitsfile+'_mom.im', fitsfile+'_mom.fits', velocity=True, dropstokes=True, stokeslast=False, overwrite=True)
 tdat, thdr=ft.getdata(fitsfile+'_mom.fits', header=True)
 
@@ -117,6 +117,7 @@ if thdr['BUNIT']=='Jy/beam.rad':
     tdat=tdat*(180./pi)
     thdr['BUNIT']='Jy/beam.deg'
 
+""" n*rms cutoff """
 if moment==[0] and rms>0 and axis=='spec':
     numf1, fac1=(len(rlval)/2), 0
     for i in range(int(numf1)):
@@ -128,7 +129,7 @@ if moment==[0] and rms>0 and axis=='spec':
 
     for i in range(tdat.shape[0]):
         for j in range(tdat.shape[1]):
-            if tdat[i,j]<=3*Irms: tdat[i,j]=0
+            if tdat[i,j]<=Nrms*Irms: tdat[i,j]=0
     ft.writeto(fitsfile+'_m'+str(moment[0])+'_'+axis+'_3rms.fits', tdat, thdr, output_verify='fix+warn', overwrite=True)
 else:
     ft.writeto(fitsfile+'_m'+str(moment[0])+'_'+axis+'.fits', tdat, thdr, output_verify='fix+warn', overwrite=True)
