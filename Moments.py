@@ -30,7 +30,7 @@ box=[] # [ra0,dec0,ra1,dec1(, ra2,dec2,ra3,dec3)] in pixel
 rms=0 # Jy/beam
 inpix=[-1] # [-1], [3*rms,1e3]
 expix=[-1] # [-1], [-1e3,-3*rms/-1]
-Nrms=3 # n*rms cutoff, default is 3*rms
+Nrms=0 # n*rms cutoff, default is 0
 
 """ input normalization """
 ohdr=ft.getheader(fitsfile+'.fits')
@@ -118,7 +118,7 @@ if thdr['BUNIT']=='Jy/beam.rad':
     thdr['BUNIT']='Jy/beam.deg'
 
 """ n*rms cutoff """
-if moment==[0] and rms>0 and axis=='spec':
+if moment==[0] and Nrms>0 and axis=='spec':
     numf1, fac1=(len(rlval)/2), 0
     for i in range(int(numf1)):
         fac1=fac1+abs(rlval[1+2*i]-rlval[0+2*i])
