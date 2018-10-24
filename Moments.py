@@ -131,6 +131,7 @@ if moment==[0] and Nrms>0 and axis=='spec':
         for j in range(tdat.shape[1]):
             if tdat[i,j]<=Nrms*Irms: tdat[i,j]=0
     ft.writeto(fitsfile+'_m'+str(moment[0])+'_'+axis+'_3rms.fits', tdat, thdr, output_verify='fix+warn', overwrite=True)
+    print('The pixels < %i*rms (%f %s) are set to be Zero' %(Nrms, Nrms*Irms, thdr['BUNIT']))
 else:
     ft.writeto(fitsfile+'_m'+str(moment[0])+'_'+axis+'.fits', tdat, thdr, output_verify='fix+warn', overwrite=True)
 
