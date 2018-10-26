@@ -12,18 +12,18 @@ Copyright:
 """
 
 import os
-pwd=os.getcwd()+'/H13COP/FoF'
+pwd=os.getcwd()+'/'
 os.chdir(pwd)
 import numpy as np
 from astropy.io import fits as ft
 from spectral_cube import SpectralCube as sc
 from astropy.wcs import WCS as wcs
 
-fitsfile='H13COP_pbcor_rdv_sub' # without suffix
-spec=[-12.318,2.081] # in km/s
-nchan=20 # in channel
-rms=0.070 # in Jy/beam, default is 0
-nexc=2 # pixels with value < -next*rms are excluded when doing moment0, default is 3/1.5
+fitsfile='' # without suffix
+spec=[] # in km/s
+nchan= # in channel
+rms=0 # in Jy/beam, default is 0
+nexc=3 # pixels with value < -next*rms are excluded when doing moment0, default is 3/1.5
 ncut=3 # pixel with value < ncut*integrated rms are set to be zero after doing moment0, default is 3/5
 
 """ input normalization """
