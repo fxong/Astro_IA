@@ -29,7 +29,7 @@ chans=[] # [spec0,spec1(, spec2,spec3)] in channel
 box=[] # [ra0,dec0,ra1,dec1(, ra2,dec2,ra3,dec3)] in pixel
 rms=0 # Jy/beam
 inpix=[-1] # [-1], [3*rms,1e3]
-expix=[-1] # [-1], [-1e3,-3*rms/-1]
+expix=[-1] # [-1], [-1e3,-1/-3*rms/-1.5*rms]
 Nrms=0 # n*rms cutoff, default is 0
 
 """ input normalization """
