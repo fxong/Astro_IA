@@ -35,7 +35,7 @@ if spec!=[]:
     cube=cube.spectral_slab(spec[0]*u.km/u.s, spec[1]*u.km/u.s)
 
 if ds9path!='':
-    regs=read_ds9(ds9path+'.region')
+    regs=read_ds9(ds9path+'.reg')
     xy=list(range(len(regs)*2))
     for i in range(len(regs)):
         if frame=='icrs':
