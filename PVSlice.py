@@ -3,6 +3,7 @@ Purpose:
     extract the position-velocity slice from a fitsfile
 Usage:
 Cautious:
+    fitsfile may be fixed by CasaFix.py first
     ds9 region should be in Line shape
 History:
     Completed. Version 0.5.0. Oct. 18, 18.
