@@ -1,6 +1,6 @@
 """ 
 Purpose:
-    calculate the optical depths of two isotopologues
+    calculate the optical depths of two isotopologues assuming they have the same excitation temperature
 Usage:
 Caution:
     the input fitsfiles must be 2D and should have already been applied by 3*rms cutoff
