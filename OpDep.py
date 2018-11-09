@@ -15,8 +15,8 @@ Copyright:
 from astropy.io import fits as ft
 import numpy as np
 
-fitsfile1='mosaic_U_m0_3rms' # without suffix
-fitsfile2='mosaic_L_m0_3rms' # without suffix
+fitsfile1='' # without suffix
+fitsfile2='' # without suffix
 ratio=60 # optical depth ratio, [tracer in fitsfile1]/[tracer in fitsfile2], for molecular gas near solar system, the ratio is about 50~60
 step=0.001
 
