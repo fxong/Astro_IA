@@ -29,8 +29,8 @@ spec=[] # in km/s
 ds9path='' # ds9 region file without suffix
 pathx=[] # in deg
 pathy=[] # in deg
-step=1 # in pixel, defaut is 1
-width=0 # in arcsec, defaut is 0
+step=1 # in pixel, default is 1
+width=0 # in arcsec, default is 0
 frame='icrs' # icrs, galactic
 show=False # False/True, default is False
 
