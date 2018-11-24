@@ -7,7 +7,7 @@ Cautious:
     ds9 region should be in Line shape
 History:
     Completed. Version 0.5.0. Oct. 18, 18.
-    Path export. TBC...
+    Bug fixed. Version 0.8.0. Nov. 24, 18.
 Copyright: written by fxong@CfA
 """
 
@@ -16,6 +16,8 @@ pwd=os.getcwd()+'/'
 os.chdir(pwd)
 from astropy import units as u
 from astropy.coordinates import SkyCoord
+from astropy.io import ascii
+from astropy.table import Table
 from regions import read_ds9
 from spectral_cube import SpectralCube
 from pvextractor import Path
@@ -90,8 +92,12 @@ if spec!=[]:
     slice.header['CRPIX1']=float(1.0)
     slice.header['CRVAL1']=linexy[2][0]/1e3
 
-slice.writeto(fitsfile+'_'+ds9path+'.fits',output_verify='fix+warn', overwrite=True)
+if ds9path!=[]: outfile=fitsfile+'_'+ds9path+'.fits'
+else: outfile=fitsfile+'_PVSlice'+'.fits'
+slice.writeto(outfile, output_verify='fix+warn', overwrite=True)
 
 """ path info export """
-# from astropy.io import ascii
-# from astropy.table import Table
+tabxy=Table([linex, liney], names=['RA', 'Dec'])
+if ds9path!=[]: output=ds9path+'.path'
+else: output='PVSlice.path'
+ascii.write(tabxy, output=output, overwrite=True)
