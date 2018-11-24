@@ -22,6 +22,7 @@ from regions import read_ds9
 from spectral_cube import SpectralCube
 from pvextractor import Path
 from pvextractor import extract_pv_slice
+import matplotlib.pyplot as plt
 
 fitsfile='' # without suffix
 spec=[] # in km/s
@@ -31,6 +32,7 @@ pathy=[] # in deg
 step=1 # in pixel, defaut is 1
 width=0 # in arcsec, defaut is 0
 frame='icrs' # icrs, galactic
+show=False # False/True, default is False
 
 """ cube and path """
 cube=SpectralCube.read(fitsfile+'.fits')
@@ -47,7 +49,7 @@ if ds9path!='':
         elif frame=='galactic':
             xy[2*i]=[regs[i].start.l.value, regs[i].start.b.value]
             xy[2*i+1]=[regs[i].end.l.value, regs[i].end.b.value]
-    xy.sort()
+    # xy.sort()
     pathx, pathy=list(range(len(xy))), list(range(len(xy)))
     for i in range(len(xy)):
         pathx[i], pathy[i]=xy[i][0], xy[i][1]
@@ -101,3 +103,10 @@ tabxy=Table([linex, liney], names=['RA', 'Dec'])
 if ds9path!=[]: output=ds9path+'.path'
 else: output='PVSlice.path'
 ascii.write(tabxy, output=output, overwrite=True)
+
+if show:
+    cube=cube.moment(order=0)
+    ax=plt.subplot(1, 1, 1, projection=cube.wcs)
+    ax.imshow(cube.value, origin='lower')
+    ax.plot(linex, liney, color='black', transform=ax.get_transform('icrs'))
+    plt.show()
