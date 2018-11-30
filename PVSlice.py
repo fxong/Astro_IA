@@ -102,7 +102,7 @@ slice.writeto(outfile, output_verify='fix+warn', overwrite=True)
 tabxy=Table([linex, liney], names=['RA', 'Dec'])
 if ds9path!=[]: output=ds9path+'.path'
 else: output='PVSlice.path'
-ascii.write(tabxy, output=output, overwrite=True)
+ascii.write(tabxy, output=output, format='fixed_width', overwrite=True)
 
 if show:
     cube=cube.moment(order=0)
