@@ -8,6 +8,7 @@ Caution:
 History:
     Completed. Version 0.8.0. Nov. 05, 18.
     Updated. Version 0.9.0. Nov. 29, 18.
+    Updated. Version 0.9.1. May. 14, 19.
 Copyright:
     written by fxong@CfA
 """
@@ -82,8 +83,8 @@ yaxis.set_axislabel(ylabel, minpad=ypad, size=ysize, weight=yweit, visible=yax_v
 xaxis.set_major_formatter('hh:mm:ss.s')
 yaxis.set_major_formatter('dd:mm:ss.s')
 # xaxis.set_separator(('$^{\\rm h}$', '$^{\\rm m}$', '$^{\\rm s}$'))
-xaxis.set_ticklabel(size=xsize, weight=xweit, visible=xtk_vis)
-yaxis.set_ticklabel(size=ysize, weight=yweit, visible=ytk_vis, rotation=ytk_rot)
+xaxis.set_ticklabel(size=xsize, weight=xweit, visible=xtk_vis, exclude_overlapping=True)
+yaxis.set_ticklabel(size=ysize, weight=yweit, visible=ytk_vis, exclude_overlapping=True, rotation=ytk_rot)
 
 """ major ticks and minor ticks """
 xma_num, yma_num=None, None
@@ -97,8 +98,8 @@ xwidth, ywidth=None, None
 xmi_num, ymi_num=None, None
 # number of minor ticks, default is None
 
-xaxis.set_ticks(number=xma_num, color=xcolor, size=xlenth, width=xwidth, exclude_overlapping=True)
-yaxis.set_ticks(number=yma_num, color=ycolor, size=ylenth, width=ywidth, exclude_overlapping=True)
+xaxis.set_ticks(number=xma_num, color=xcolor, size=xlenth, width=xwidth)
+yaxis.set_ticks(number=yma_num, color=ycolor, size=ylenth, width=ywidth)
 
 xaxis.display_minor_ticks(True)
 yaxis.display_minor_ticks(True)
@@ -127,7 +128,8 @@ norm=ImageNormalize(dat, interval=interval, stretch=stretch)
 if colormap is not None: plt.set_cmap(colormap)
 cmap=mpl.cm.get_cmap()
 cmap.set_bad(color='white')
-im=ax.imshow(dat, norm=norm, interpolation=interp, cmap=cmap, origin='lower')
+im=ax.imshow(dat, interpolation=interp, cmap=cmap, origin='lower')
+# im=ax.imshow(dat, norm=norm, interpolation=interp, cmap=cmap, origin='lower')
 
 """
 The following arguments need to be set in the command.
