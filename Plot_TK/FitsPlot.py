@@ -28,6 +28,7 @@ import matplotlib as mpl
 mpl.rcParams['xtick.direction']='in'
 mpl.rcParams['ytick.direction']='in'
 import matplotlib.pyplot as plt
+import matplotlib.colors as colors
 
 from astropy.visualization import ImageNormalize
 from astropy.visualization import ManualInterval
@@ -121,15 +122,17 @@ elif scaling=='sqrt': stretch=SqrtStretch()
 elif scaling=='squared': stretch=SquaredStretch()
 if scale is None: interval=ManualInterval(vmin=np.nanmin(dat), vmax=np.nanmax(dat))
 else: interval=ManualInterval(vmin=scale[0], vmax=scale[1])
-norm=ImageNormalize(dat, interval=interval, stretch=stretch)
+# norm=ImageNormalize(dat, interval=interval, stretch=stretch)
+
+if scale is None: norm=colors.Normalize(vmin=np.nanmin(dat), vmax=np.nanmax(dat))
+else: norm=colors.Normalize(vmin=scale[0], vmax=scale[1])
 
 # ax.set_xlim(-0.5, dat.shape[1]-0.5)
 # ax.set_ylim(-0.5, dat.shape[0]-0.5)
 if colormap is not None: plt.set_cmap(colormap)
 cmap=mpl.cm.get_cmap()
 cmap.set_bad(color='white')
-im=ax.imshow(dat, interpolation=interp, cmap=cmap, origin='lower')
-# im=ax.imshow(dat, norm=norm, interpolation=interp, cmap=cmap, origin='lower')
+im=ax.imshow(dat, norm=norm, interpolation=interp, cmap=cmap, origin='lower')
 
 """
 The following arguments need to be set in the command.
