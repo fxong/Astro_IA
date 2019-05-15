@@ -8,7 +8,7 @@ Caution:
 History:
     Completed. Version 0.8.0. Nov. 05, 18.
     Updated. Version 0.9.0. Nov. 29, 18.
-    Updated. Version 0.9.1. May. 14, 19.
+    Bug fixed. Version 0.9.1. May. 14, 19.
 Copyright:
     written by fxong@CfA
 """
