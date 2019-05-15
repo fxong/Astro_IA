@@ -8,6 +8,7 @@ Caution:
 History:
     Completed. Version 0.8.0. Nov. 05, 18.
     Updated. Version 0.9.0. Nov. 30, 18.
+    Bug fixed. Version 0.9.1. May. 15, 19.
 Copyright:
     written by fxong@CfA
 """
@@ -27,6 +28,7 @@ import matplotlib as mpl
 mpl.rcParams['xtick.direction']='in'
 mpl.rcParams['ytick.direction']='in'
 import matplotlib.pyplot as plt
+import matplotlib.colors as colors
 
 from astropy.visualization import ImageNormalize
 from astropy.visualization import ManualInterval
@@ -91,8 +93,8 @@ for pltid in range(dat.shape[0]):
     xaxis.set_major_formatter('hh:mm:ss.s')
     yaxis.set_major_formatter('dd:mm:ss.s')
     # xaxis.set_separator(('$^{\\rm h}$', '$^{\\rm m}$', '$^{\\rm s}$'))
-    xaxis.set_ticklabel(size=xsize, weight=xweit, visible=xtk_vis)
-    yaxis.set_ticklabel(size=ysize, weight=yweit, visible=ytk_vis, rotation=ytk_rot)
+    xaxis.set_ticklabel(size=xsize, weight=xweit, visible=xtk_vis, exclude_overlapping=True)
+    yaxis.set_ticklabel(size=ysize, weight=yweit, visible=ytk_vis, exclude_overlapping=True, rotation=ytk_rot)
 
     """ major ticks and minor ticks """
     xma_num, yma_num=None, None
@@ -106,8 +108,8 @@ for pltid in range(dat.shape[0]):
     xmi_num, ymi_num=None, None
     # number of minor ticks, default is None
 
-    xaxis.set_ticks(number=xma_num, color=xcolor, size=xlenth, width=xwidth, exclude_overlapping=True)
-    yaxis.set_ticks(number=yma_num, color=ycolor, size=ylenth, width=ywidth, exclude_overlapping=True)
+    xaxis.set_ticks(number=xma_num, color=xcolor, size=xlenth, width=xwidth)
+    yaxis.set_ticks(number=yma_num, color=ycolor, size=ylenth, width=ywidth)
 
     xaxis.display_minor_ticks(True)
     yaxis.display_minor_ticks(True)
@@ -129,7 +131,10 @@ for pltid in range(dat.shape[0]):
     elif scaling=='squared': stretch=SquaredStretch()
     if scale is None: interval=ManualInterval(vmin=np.nanmin(dat), vmax=np.nanmax(dat))
     else: interval=ManualInterval(vmin=scale[0], vmax=scale[1])
-    norm=ImageNormalize(dat, interval=interval, stretch=stretch)
+    # norm=ImageNormalize(dat, interval=interval, stretch=stretch)
+    
+    if scale is None: norm=colors.Normalize(vmin=np.nanmin(dat), vmax=np.nanmax(dat))
+    else: norm=colors.Normalize(vmin=scale[0], vmax=scale[1])
 
     # ax.set_xlim(-0.5, dat.shape[1]-0.5)
     # ax.set_ylim(-0.5, dat.shape[0]-0.5)
