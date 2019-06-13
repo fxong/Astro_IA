@@ -10,7 +10,7 @@ Copyright:
 """
 
 import os
-pwd=os.getcwd()+'/H13COP/Young/FilProfile/F1/Plot'
+pwd=os.getcwd()+'/'
 os.chdir(pwd)
 import numpy as np
 import matplotlib as mpl
@@ -24,7 +24,7 @@ from astropy.wcs import WCS as wcs
 
 tablefile='FilProfile_profile.data' # table of the profile of filament
 int_range=[] # integrated range of line mass, unit is pc, default is []
-col_thres=0.320538*1e23 # column density threshold of line mass, unit is cm^-2
+col_thres=0 # column density threshold of line mass, unit is cm^-2
 figsize=None # size of the figure, e.g., [6.4, 4.8]/[8.0, 6.0], default is None
 
 """ inputs """
