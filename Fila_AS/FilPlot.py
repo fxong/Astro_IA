@@ -102,17 +102,17 @@ ax.plot([int_range[0], int_range[0]], ax.get_ylim(), color='black', linestyle='d
 ax.plot([int_range[1], int_range[1]], ax.get_ylim(), color='black', linestyle='dashed', linewidth=1.0, label='')
 
 """ model plotting """
-Npl=329265685952064573669376.000000/1e23
-p=7.836017
-Rf=0.123005
+Npl=
+p=
+Rf=
 Plx=np.linspace(np.nanmin(xdat), np.nanmax(xdat), xdat.shape[0]*3)
 Ply=Npl/np.power(1+(Plx/Rf)**2, (p-1)/2)
 
 ax.plot(Plx, Ply, color='red', linestyle='dashed', linewidth=1.5, label='Plummer fit')
 
-Ngs=323543282449268483293184.000000/1e23
-mu=0.0
-sigma=0.051287
+Ngs=
+mu=
+sigma=
 Gsx=np.linspace(np.nanmin(xdat), np.nanmax(xdat), xdat.shape[0]*3)
 Gsy=Ngs*np.exp((-(Gsx-mu)**2)/(2*(sigma**2)))
 
@@ -125,6 +125,3 @@ plt.show()
 
 os.system('rm -f FilPlot.pdf')
 fig.savefig('FilPlot.pdf', format='pdf')
-
-# The integrated range of line mass is from -0.103666 pc to 0.127387 pc
-# The line mass of the filament is 916.250122 +/- 3.419815 Msun/pc
